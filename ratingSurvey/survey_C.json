@@ -1,0 +1,159 @@
+[
+  {
+    "level": "C", 
+    "packagename": "com.cool3dphotogallery.real", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.crystal.wallpapers.wallpaper.android", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.gst.mathworksheet", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.pansion.sanguo", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.conduit.app_52d275e6b297417692bdd2c6c21c3289.app", 
+    "pairs": {
+      "GET_ACCOUNTS": [], 
+      "READ_PHONE_STATE": [
+        "PAYMENT"
+      ], 
+      "SEND_SMS": []
+    }, 
+    "rate": -0.539801493
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.custom.lwp.Burnout_Sport_Car_LWP", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.melo.news", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.starcostudios.babymusiclite", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "gs.games.battlecity", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.sh.redbattery", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.astraware.mahjongotd", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS", 
+        "MOBILE_ANALYTICS"
+      ], 
+      "READ_PHONE_STATE": [
+        "MOBILE_ANALYTICS"
+      ]
+    }, 
+    "rate": -0.373096262
+  }, 
+  {
+    "level": "C", 
+    "packagename": "com.adictiz.stupidpigeon", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "MOBILE_ANALYTICS", 
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }
+]

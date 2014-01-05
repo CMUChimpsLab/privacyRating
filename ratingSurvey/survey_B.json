@@ -1,0 +1,127 @@
+[
+  {
+    "level": "B", 
+    "packagename": "com.wolphi.clock", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "masraim.webview.selftest", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "ca.webpanda.cny2011b", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "org.schiphol", 
+    "pairs": {
+      "READ_CONTACTS": [
+        "INTERNAL"
+      ]
+    }, 
+    "rate": -0.088096429
+  }, 
+  {
+    "level": "B", 
+    "packagename": "com.bestdragon.englishquiz", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "NOT EXTERNAL", 
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "com.hoecs.news.dcfc", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "com.dancadar.mobile.vindecoderfree", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "com.rye.book.TheLanternFestival", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "MOBILE_ANALYTICS"
+      ], 
+      "READ_PHONE_STATE": [
+        "MOBILE_ANALYTICS"
+      ]
+    }, 
+    "rate": -0.093980836
+  }, 
+  {
+    "level": "B", 
+    "packagename": "com.calfordcn.hp", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "ie.communicorp.bg.bgradio.android", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "com.shinshow.minesweeper", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "NOT EXTERNAL", 
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "com.joinmobile.crossfire", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }
+]

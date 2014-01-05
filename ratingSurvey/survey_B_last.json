@@ -1,0 +1,22 @@
+[
+  {
+    "level": "B", 
+    "packagename": "com.appcookr.app_kr_161", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }, 
+  {
+    "level": "B", 
+    "packagename": "com.mobdub.channel.KFDA", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.279115426
+  }
+]

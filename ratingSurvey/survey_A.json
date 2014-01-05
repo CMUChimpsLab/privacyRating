@@ -1,0 +1,90 @@
+[
+  {
+    "level": "A", 
+    "packagename": "com.ahorrecomparando.chistes_espanol", 
+    "pairs": {}, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "com.maliboss.roukya", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [], 
+      "GET_ACCOUNTS": [], 
+      "READ_CONTACTS": [], 
+      "RECORD_AUDIO": []
+    }, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "com.deluiz.jaist", 
+    "pairs": {}, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "com.ruckygames.mynumberplace", 
+    "pairs": {}, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "inlive.cocoa.randomtalk", 
+    "pairs": {}, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "com.nathan.cherry.notes", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [], 
+      "GET_ACCOUNTS": [], 
+      "READ_CONTACTS": [], 
+      "RECORD_AUDIO": []
+    }, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "appinventor.ai_Kaitokid1995.AlR8ya", 
+    "pairs": {}, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "ExitZero.Tesoro", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [], 
+      "GET_ACCOUNTS": [], 
+      "READ_CONTACTS": [], 
+      "READ_PHONE_STATE": [], 
+      "RECORD_AUDIO": []
+    }, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "com.appcraft.book.AOTINDGAVWHACBXPM", 
+    "pairs": {}, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "com.appbuilder.u43650p86352", 
+    "pairs": {}, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "air.cicada.combatnaval", 
+    "pairs": {}, 
+    "rate": 0
+  }, 
+  {
+    "level": "A", 
+    "packagename": "cn.com.wiisoft.happyflags", 
+    "pairs": {}, 
+    "rate": 0
+  }
+]

@@ -1,0 +1,7 @@
+This folder contains several json files.
+
+Each json file contains one list of a certain grade apks which I randomly picked.
+
+I made five survey forms which contains five questions of A B C D and one random grade in a random order.
+
+the file _last.json is the list where I pick last question.

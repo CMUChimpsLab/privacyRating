@@ -1,0 +1,35 @@
+[
+  {
+    "level": "D", 
+    "packagename": "com.mobileroadie.app_521", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "CAMERA": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ], 
+      "RECORD_AUDIO": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -1.3857728029999998
+  }, 
+  {
+    "level": "D", 
+    "packagename": "in.pww.sms.backup.and.restore", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "PAYMENT", 
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -1.119040434
+  }
+]

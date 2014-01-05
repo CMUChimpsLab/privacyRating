@@ -1,0 +1,230 @@
+[
+  {
+    "level": "D", 
+    "packagename": "com.sirma.android.roamingcaller", 
+    "pairs": {
+      "READ_CONTACTS": [
+        "INTERNAL"
+      ], 
+      "READ_PHONE_STATE": [
+        "PAYMENT"
+      ]
+    }, 
+    "rate": -0.627897922
+  }, 
+  {
+    "level": "D", 
+    "packagename": "com.qll.sb029.twjp", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS", 
+        "MOBILE_ANALYTICS"
+      ], 
+      "CAMERA": [], 
+      "GET_ACCOUNTS": [], 
+      "READ_CONTACTS": [], 
+      "READ_PHONE_STATE": [
+        "PAYMENT", 
+        "TARGETED_ADS"
+      ], 
+      "RECORD_AUDIO": [], 
+      "SEND_SMS": [
+        "PAYMENT"
+      ]
+    }, 
+    "rate": -2.048864995
+  }, 
+  {
+    "level": "D", 
+    "packagename": "us.colormefree.animals.o", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "MOBILE_ANALYTICS", 
+        "TARGETED_ADS"
+      ], 
+      "CAMERA": [
+        "TARGETED_ADS"
+      ], 
+      "GET_ACCOUNTS": [
+        "TARGETED_ADS"
+      ], 
+      "READ_CONTACTS": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -2.947156944
+  }, 
+  {
+    "level": "D", 
+    "packagename": "com.bloodhound.soundboard.gabrieliglesias.free", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS", 
+        "MOBILE_ANALYTICS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS", 
+        "MOBILE_ANALYTICS"
+      ]
+    }, 
+    "rate": -0.673219777
+  }, 
+  {
+    "level": "D", 
+    "packagename": "com.blabberboxchristmas.android", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS", 
+        "MOBILE_ANALYTICS"
+      ], 
+      "CAMERA": [], 
+      "GET_ACCOUNTS": [], 
+      "READ_CONTACTS": [], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS", 
+        "PAYMENT"
+      ], 
+      "RECORD_AUDIO": [], 
+      "SEND_SMS": [
+        "PAYMENT"
+      ]
+    }, 
+    "rate": -2.048864995
+  }, 
+  {
+    "level": "D", 
+    "packagename": "com.appmakr.app276607", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "MOBILE_ANALYTICS", 
+        "PAYMENT", 
+        "SNS"
+      ], 
+      "GET_ACCOUNTS": [], 
+      "READ_CONTACTS": [
+        "SNS"
+      ], 
+      "READ_PHONE_STATE": [
+        "MOBILE_ANALYTICS", 
+        "TARGETED_ADS", 
+        "SNS"
+      ], 
+      "RECORD_AUDIO": []
+    }, 
+    "rate": -1.368815589
+  }, 
+  {
+    "level": "D", 
+    "packagename": "com.mobilerise.lavapoolfree", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS", 
+        "MOBILE_ANALYTICS"
+      ], 
+      "CAMERA": [
+        "TARGETED_ADS"
+      ], 
+      "GET_ACCOUNTS": [
+        "TARGETED_ADS"
+      ], 
+      "READ_CONTACTS": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -2.947156944
+  }, 
+  {
+    "level": "D", 
+    "packagename": "com.custom.lwp.VPinkLove", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "GET_ACCOUNTS": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -1.169043313
+  }, 
+  {
+    "level": "D", 
+    "packagename": "gr.dosms", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "MOBILE_ANALYTICS"
+      ], 
+      "READ_CONTACTS": [
+        "INTERNAL"
+      ], 
+      "READ_PHONE_STATE": [
+        "PAYMENT", 
+        "MOBILE_ANALYTICS"
+      ]
+    }, 
+    "rate": -0.721878758
+  }, 
+  {
+    "level": "D", 
+    "packagename": "com.chinmike.copterclassic", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS", 
+        "MOBILE_ANALYTICS"
+      ], 
+      "READ_CONTACTS": [], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS", 
+        "MOBILE_ANALYTICS"
+      ]
+    }, 
+    "rate": -0.673219777
+  }, 
+  {
+    "level": "D", 
+    "packagename": "com.rockingcoolie.memecentral", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS", 
+        "MOBILE_ANALYTICS"
+      ], 
+      "CAMERA": [
+        "TARGETED_ADS"
+      ], 
+      "GET_ACCOUNTS": [
+        "TARGETED_ADS"
+      ], 
+      "READ_CONTACTS": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -2.947156944
+  }, 
+  {
+    "level": "D", 
+    "packagename": "com.appforever.book.dmbj", 
+    "pairs": {
+      "ACCESS_COARSE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.598472863
+  }
+]

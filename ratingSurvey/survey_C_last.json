@@ -1,0 +1,28 @@
+[
+  {
+    "level": "C", 
+    "packagename": "com.heightechllc.behappy", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }, 
+  {
+    "level": "C", 
+    "packagename": "inutilsoft.HideMyFilesFree", 
+    "pairs": {
+      "ACCESS_FINE_LOCATION": [
+        "TARGETED_ADS"
+      ], 
+      "READ_PHONE_STATE": [
+        "TARGETED_ADS"
+      ]
+    }, 
+    "rate": -0.5792389410000001
+  }
+]
