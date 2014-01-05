@@ -3,7 +3,7 @@ import numpy as np
 import json
 import random
 
-db = MongoClient("localhost", 27017)['privacygrading']
+db = MongoClient("localhost", 27017)['appanalysis']
 
 def getRateTable(filename):
     f = open(filename)
@@ -16,9 +16,7 @@ def getRateTable(filename):
 
 def calculateRate(rateTable):
     rateDict = {}
-    for entry in db.packagePair.find(timeout=False):
-        if entry.has_key('rate'):
-          continue
+    for entry in db.packagePair.find():
         packagename = entry['packagename']
         rate = 0
         for permissionPattern in rateTable:
@@ -96,10 +94,10 @@ def generateQuestions(rateTable, levels = ['D', 'C', 'B', 'A'], questionSize = 1
 
 
 if __name__ == "__main__":
-    rateTable = getRateTable("../data/avgCrowdSourceResult.csv")
-    rateDict = calculateRate(rateTable)
-    generateHistData(200, sorted(rateDict.values()))
+    rateTable = getRateTable("avgCrowdSourceResult.csv")
+    #rateDict = calculateRate(rateTable)
+    #generateHistData(200, sorted(rateDict.values()))
     #generateHistData(200)
-    transRate()
+    #transRate()
     #dumpJson()
-    #generateQuestions(rateTable, questionSize = 2)
+    generateQuestions(rateTable, questionSize = 2)
