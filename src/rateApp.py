@@ -4,9 +4,10 @@ import json
 import random
 
 db = MongoClient("localhost", 27017)['privacygrading']
+rateTablePath = ("/home/lsuper/projects/privacyRating/data/avgCrowdSourceResult.csv")
 
-def getRateTable(filename):
-    f = open(filename)
+def getRateTable(rateTablePath = rateTablePath):
+    f = open(rateTablePath)
     titles = f.readline().strip().split(",")
     rateTable = {}
     for row in f.readlines():
@@ -14,21 +15,26 @@ def getRateTable(filename):
         rateTable[rateList[0]] = {titles[index]: float(rateList[index]) for index in range(1,len(rateList))}
     return rateTable
 
-def calculateRate(rateTable):
+#calculate Rate for all entry in packagePair table in one loop
+def calculateRate(rateTablePath = rateTablePath):
+    rateTable = getRateTable(filename)
     rateDict = {}
     for entry in db.packagePair.find(timeout=False):
-        if entry.has_key('rate'):
-          continue
         packagename = entry['packagename']
-        rate = 0
-        for permissionPattern in rateTable:
-            for permission, purposeList in entry['pairs'].iteritems():
-                if permission.find(permissionPattern) != -1:
-                    rateList = [rateTable[permissionPattern].get(purpose, 0) for purpose in purposeList if rateTable[permissionPattern].get(purpose, 0) < 0]
-                    rate += sum(rateList)
+        rate = calculateRateforOneApp(entry)
         rateDict[packagename] = rate
         db.packagePair.update({'packagename' : entry['packagename']}, {'$set': {'rate': rate}} )
     return rateDict
+
+#calculate Rate for one entry each time
+def calculateRateforOneApp(packagePairEntry, rateTable = getRateTable(rateTablePath)):
+  rate = 0
+  for permissionPattern in rateTable:
+      for permission, purposeList in packagePairEntry['pairs'].iteritems():
+          if permission.find(permissionPattern) != -1:
+              rateList = [rateTable[permissionPattern].get(purpose, 0) for purpose in purposeList if rateTable[permissionPattern].get(purpose, 0) < 0]
+              rate += sum(rateList)
+  return rate
 
 #a utility function for generating histogram 
 def generateHistData(slotSize, originalData = []):
@@ -60,14 +66,33 @@ def generateHistData(slotSize, originalData = []):
 
 #slots and level for all pairs summation; A-F
 #slots = [-4.479481834, -2.900681466, -0.7016380962, -0.3069380042, -0.0813950945, 0.0877620878, 1.159090909], level = ['F', 'E', 'D', 'C', 'B', 'A']
-def transRate(slots = [-0.5863992984, -0.29319964921, -0.0225538192, 0.0225538192], levels = ['D', 'C', 'B', 'A']):
+slots = [-0.5863992984, -0.29319964921, -0.0225538192, 0.0225538192]
+levels = ['D', 'C', 'B', 'A']
+def transRateToLevel(slots = slots, levels = levels):
     lower = min(slots) - 1
     upper = slots[0]
     for index in range(len(slots)):
         upper = slots[index]
         db.packagePair.update({'rate': {'$gte': lower, '$lt': upper}}, {'$set': {'level': levels[index]}}, multi=True)
         lower = slots[index]
+    db.packagePair.update({'rate': {'$gte': slots[-1]}}, {'$set': {'level': levels[-1]}}, multi=True)
+    db.packagePair.update({'rate': {'$lt': slots[0]}}, {'$set': {'level': levels[0]}}, multi=True)
 
+#this method is for extractApp.extractPackagePair to use for each entry
+def getLevel(rate, slots = slots, levels = levels):
+  if rate < slots[0]:
+      return levels[0]
+  if rate >= slots[-1]:
+      return levels[-1]
+  lower = min(slots)
+  upper = slots[0]
+  for index in range(len(slots)):
+      upper = slots[index]
+      if rate >= lower and rate < upper:
+        return levels[index]
+      lower = slots[index]
+  
+  
 def dumpJson():
     lst = []
     for entry in db.packagePair.find({}, {'_id':0}):
@@ -96,10 +121,9 @@ def generateQuestions(rateTable, levels = ['D', 'C', 'B', 'A'], questionSize = 1
 
 
 if __name__ == "__main__":
-    rateTable = getRateTable("../data/avgCrowdSourceResult.csv")
     rateDict = calculateRate(rateTable)
     generateHistData(200, sorted(rateDict.values()))
     #generateHistData(200)
-    transRate()
+    transRateToLevel()
     #dumpJson()
     #generateQuestions(rateTable, questionSize = 2)

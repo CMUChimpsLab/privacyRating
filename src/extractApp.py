@@ -1,6 +1,7 @@
 from MySQLdb import connect
 
 from pymongo import MongoClient
+from rateApp import calculateRateforOneApp, transRateToLevel, generateHistData, getLevel
 
 dbStaticAnalysis = MongoClient("localhost", 27017)['staticAnalysis']
 dbPrivacyGrading = MongoClient("localhost", 27017)['privacygrading']
@@ -69,27 +70,28 @@ def copyfromMysql():
 
 #this is used to build packagePair table
 def extractPackagePair():
-    if dbPrivacyGrading.packagePair.count() > 0:
-        print "packagePair exists"
-        return
     appEntry = {}
     index = 0
-    labeledPackageList = [entry['externalpack'] for entry in dbPrivacyGrading.labeled3rdparty.find({}, {'externalpack':1})]
+    labeledPackageDict = {entry['externalpack']: entry['apitype'] for entry in dbPrivacyGrading.labeled3rdparty.find({}, {'externalpack':1, 'apitype':1})}
     packagename = dbStaticAnalysis.Test_permissionlist.find().sort('filename',1)[0]['filename'].rpartition('.')[0]
     for entry in dbStaticAnalysis.Test_permissionlist.find().sort('filename',1):
         index += 1
         print index
         if packagename != entry['filename'].rpartition('.')[0]:
-          dbPrivacyGrading.packagePair.insert({"packagename": packagename, "pairs": {key: list(value) for key, value in appEntry.iteritems()}})
+          packagePairEntry = {'packagename': packagename, 'pairs': {key: list(value) for key, value in appEntry.iteritems()}}
+          rate = calculateRateforOneApp(packagePairEntry) 
+          packagePairEntry['rate'] = rate
+          packagePairEntry['level'] = getLevel(rate) 
+          dbPrivacyGrading.packagePair.update({'packagename': packagename}, packagePairEntry, upsert=True)
           #reset and move to next package
           appEntry = {}
           packagename = entry['filename'].rpartition('.')[0]
-        if entry["is_external"] == False:
+        if entry['is_external'] == False:
             purpose = "INTERNAL" 
         elif entry["externalpackagename"] != "NA":
             # It is confirmed in current labeled3rdparty table, each externalpack only has one entry
-            if entry['externalpackagename'] in labeledPackageList:
-                purpose = dbPrivacyGrading.labeled3rdparty.find_one({'externalpack': entry['externalpackagename']})['apitype']
+            if entry['externalpackagename'] in labeledPackageDict:
+                purpose = labeledPackageDict[entry['externalpackagename']]
                 if purpose == "NOT EXTERNAL":
                     purpose = "INTERNAL"
             else:
@@ -104,3 +106,5 @@ def extractPackagePair():
 if __name__ == "__main__":
     #copyfromMysql()
     extractPackagePair()
+    transRateToLevel()
+    generateHistData(200)
