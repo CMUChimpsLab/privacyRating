@@ -4,7 +4,7 @@ import json
 import random
 
 db = MongoClient("localhost", 27017)['privacygrading']
-rateTablePath = ("/home/lsuper/projects/privacyRating/data/avgCrowdSourceResult.csv")
+rateTablePath = ("/home/lsuper/projects/privacyGradePipeline/privacyRating/data/avgCrowdSourceResult.csv")
 
 def getRateTable(rateTablePath = rateTablePath):
     f = open(rateTablePath)
@@ -37,7 +37,7 @@ def calculateRateforOneApp(packagePairEntry, rateTable = getRateTable(rateTableP
   return rate
 
 #a utility function for generating histogram 
-def generateHistData(slotSize, originalData = []):
+def generateHistData(slotSize, outputFile, originalData = []):
     if originalData == []:
         for entry in db.packagePair.find():
             originalData.append(entry['rate'])
@@ -56,9 +56,9 @@ def generateHistData(slotSize, originalData = []):
             else:
                 index += 1
     resultList.append(index)
-    print slots[0], ',', 0
+    print >> outputFile, slots[0], ',', 0
     for i in range(1, len(slots)):
-        print slots[i], ',', resultList[i] - resultList[i-1]
+        print >> outputFile, slots[i], ',', resultList[i] - resultList[i-1]
 
 #This method transit rate to level [)
 #slots and level for only minus pairs summation, max is 0; A-D

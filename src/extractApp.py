@@ -3,6 +3,8 @@ from MySQLdb import connect
 from pymongo import MongoClient
 from rateApp import calculateRateforOneApp, transRateToLevel, generateHistData, getLevel
 
+import sys
+
 dbStaticAnalysis = MongoClient("localhost", 27017)['staticAnalysis']
 dbPrivacyGrading = MongoClient("localhost", 27017)['privacygrading']
 
@@ -69,10 +71,12 @@ def copyfromMysql():
     cur.close()
 
 #this is used to build packagePair table
-def extractPackagePair():
+def extractPackagePair(updatedApkListFile):
     appEntry = {}
     index = 0
     labeledPackageDict = {entry['externalpack']: entry['apitype'] for entry in dbPrivacyGrading.labeled3rdparty.find({}, {'externalpack':1, 'apitype':1})}
+    #the following code is extracting app from whole Test_permissionlist. Use it when rebuild the whole database
+    """
     packagename = dbStaticAnalysis.Test_permissionlist.find().sort('filename',1)[0]['filename'].rpartition('.')[0]
     for entry in dbStaticAnalysis.Test_permissionlist.find().sort('filename',1):
         index += 1
@@ -101,10 +105,40 @@ def extractPackagePair():
         purposeSet = appEntry.get(entry["permission"], set()) | set([purpose])
         appEntry.update({entry["permission"]: purposeSet})
         print purpose, appEntry
+    """
+    #the following two lines is extracting app from updated app list, which is generated from static analysis code
+    for line in updatedApkListFile:
+      packagename = line.rstrip('\n')
+      appEntry = {}
+      for entry in dbStaticAnalysis.Test_permissionlist.find({'packagename':packagename}):
+        if entry['is_external'] == False:
+            purpose = "INTERNAL" 
+        elif entry["externalpackagename"] != "NA":
+            # It is confirmed in current labeled3rdparty table, each externalpack only has one entry
+            if entry['externalpackagename'] in labeledPackageDict:
+                purpose = labeledPackageDict[entry['externalpackagename']]
+                if purpose == "NOT EXTERNAL":
+                    purpose = "INTERNAL"
+            else:
+                continue
+        else:
+            continue
+        purposeSet = appEntry.get(entry["permission"], set()) | set([purpose])
+        appEntry.update({entry["permission"]: purposeSet})
+        print purpose, appEntry
+      packagePairEntry = {'packagename': packagename, 'pairs': {key: list(value) for key, value in appEntry.iteritems()}}
+      rate = calculateRateforOneApp(packagePairEntry) 
+      packagePairEntry['rate'] = rate
+      packagePairEntry['level'] = getLevel(rate) 
+
+      dbPrivacyGrading.packagePair.update({'packagename': packagename}, packagePairEntry, upsert=True)
+        
 
 
 if __name__ == "__main__":
     #copyfromMysql()
-    extractPackagePair()
+    updatedApkListFile = open(sys.argv[1])
+    outputHistogramFile = open(sys.argv[2], 'w')
+    extractPackagePair(updatedApkListFile)
     transRateToLevel()
-    generateHistData(200)
+    generateHistData(200, outputHistogramFile)
