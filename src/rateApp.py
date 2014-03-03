@@ -26,18 +26,22 @@ def calculateRate(rateTablePath = rateTablePath):
         db.packagePair.update({'packagename' : entry['packagename']}, {'$set': {'rate': rate}} )
     return rateDict
 
-#calculate Rate for one entry each time
-def calculateRateforOneApp(packagePairEntry, rateTable = getRateTable(rateTablePath)):
+#calculate Rate for one entry each time; also return negativePermissioniPurposeDict
+def calculateRateforOneApp(labeledPermissionPurposesDict, rateTable = getRateTable(rateTablePath)):
   rate = 0
+  negativePermissionPurposeDict = {}
   for permissionPattern in rateTable:
-      for permission, purposeList in packagePairEntry['pairs'].iteritems():
+      for permission, purposeSet in labeledPermissionPurposesDict.iteritems():
           if permission.find(permissionPattern) != -1:
-              rateList = [rateTable[permissionPattern].get(purpose, 0) for purpose in purposeList if rateTable[permissionPattern].get(purpose, 0) < 0]
+              negativePurposeSet = set([purpose for purpose in purposeSet if rateTable[permissionPattern].get(purpose, 0) < 0])
+              negativePermissionPurposeDict.update({permission: negativePermissionPurposeDict.get(permission, set()) | set(negativePurposeSet)})   
+              rateList = [rateTable[permissionPattern].get(purpose, 0) for purpose in negativePurposeSet]
               rate += sum(rateList)
-  return rate
+  return rate, negativePermissionPurposeDict
 
 #a utility function for generating histogram 
 def generateHistData(slotSize, outputFile, originalData = []):
+    slotSize = float(slotSize)
     if originalData == []:
         for entry in db.packagePair.find():
             originalData.append(entry['rate'])
@@ -55,7 +59,8 @@ def generateHistData(slotSize, outputFile, originalData = []):
                 break
             else:
                 index += 1
-    resultList.append(index)
+    while len(resultList) < len(slots):
+        resultList.append(index)
     print >> outputFile, slots[0], ',', 0
     for i in range(1, len(slots)):
         print >> outputFile, slots[i], ',', resultList[i] - resultList[i-1]
@@ -66,7 +71,9 @@ def generateHistData(slotSize, outputFile, originalData = []):
 
 #slots and level for all pairs summation; A-F
 #slots = [-4.479481834, -2.900681466, -0.7016380962, -0.3069380042, -0.0813950945, 0.0877620878, 1.159090909], level = ['F', 'E', 'D', 'C', 'B', 'A']
-slots = [-0.5863992984, -0.29319964921, -0.0225538192, 0.0225538192]
+#slots = [-0.5863992984, -0.29319964921, -0.0225538192, 0.0225538192]
+#slots = [-0.7752027885, -0.1033603718, -0.02584009295, 0.02584009295] #20140218
+slots = [-0.5746956041, -0.2947156944, -0.01473578472, 0.01473578472]
 levels = ['D', 'C', 'B', 'A']
 def transRateToLevel(slots = slots, levels = levels):
     lower = min(slots) - 1
@@ -121,8 +128,8 @@ def generateQuestions(rateTable, levels = ['D', 'C', 'B', 'A'], questionSize = 1
 
 
 if __name__ == "__main__":
-    rateDict = calculateRate(rateTable)
-    generateHistData(200, sorted(rateDict.values()))
+    #rateDict = calculateRate(rateTable)
+    #generateHistData(200, sorted(rateDict.values()))
     #generateHistData(200)
     transRateToLevel()
     #dumpJson()
