@@ -17,7 +17,6 @@ def getRateTable(rateTablePath = rateTablePath):
 
 #calculate Rate for all entry in packagePair table in one loop
 def calculateRate(rateTablePath = rateTablePath):
-    rateTable = getRateTable(filename)
     rateDict = {}
     for entry in db.packagePair.find(timeout=False):
         packagename = entry['packagename']

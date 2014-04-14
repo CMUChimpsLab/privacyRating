@@ -73,8 +73,6 @@ def copyfromMysql():
 
 #this is used to build packagePair table
 def extractPackagePair(updatedApkList):
-    appEntry = {}
-    index = 0
     labeledPackageDict = {entry['externalpack']: entry['apitype'] for entry in dbPrivacyGrading.labeled3rdparty.find({}, {'externalpack':1, 'apitype':1})}
     #the following two lines is extracting app from updated app list, which is generated from static analysis code
     for packagename in updatedApkList:
