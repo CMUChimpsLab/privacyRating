@@ -16,14 +16,18 @@ schemaStr = "{http://schemas.android.com/apk/res/android}"
 permissionList = []
 
 for permission in manifestTree.findall("permission"):
-    permissionList.append({"name": permission.get(schemaStr + "name", ""), "description": permission.get(schemaStr + "description")[8:] if permission.get(schemaStr + "description") else "", "permissionFlags": permission.get(schemaStr + "permissionFlags", ""), "permissionGroup": permission.get(schemaStr + "permissionGroup", ""), "protectionLevel": permission.get(schemaStr + "protectionLevel", "")})
+    """
+    label is A name for the permission, one that can be displayed to users. E.g. Send SMS messages   
+    name is Java style name. E.g. android.permission.SEND_SMS
+    """
+    permissionList.append({"label": permission.get(schemaStr + "label")[8:] if permission.get(schemaStr + "label") else "", "name": permission.get(schemaStr + "name", ""), "description": permission.get(schemaStr + "description")[8:] if permission.get(schemaStr + "description") else "", "permissionFlags": permission.get(schemaStr + "permissionFlags", ""), "permissionGroup": permission.get(schemaStr + "permissionGroup", ""), "protectionLevel": permission.get(schemaStr + "protectionLevel", "")})
 
 for p in permissionList:
     if p["description"] != "":
-        print len(descriptionTree.findall(".//*[@name=%s]"%("\""+ p["description"]+ "\"")))
         print p
         p["description"] = descriptionTree.findall(".//*[@name=%s]"%("\""+ p["description"]+ "\""))[0].text.replace("\n","")
         p["description"] = re.sub(" +", " ", p["description"])
+        p["label"] = descriptionTree.findall(".//*[@name=%s]"%("\""+ p["label"]+ "\""))[0].text.replace("\n","")
 
 print >> outputFile, "\t".join(sorted(p.keys()))
 for p in permissionList:
