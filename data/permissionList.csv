@@ -1,0 +1,231 @@
+description	name	permissionFlags	permissionGroup	protectionLevel
+Allows the app to send SMS messages. This may result in unexpected charges. Malicious apps may cost you money by sending messages without your confirmation.	android.permission.SEND_SMS	costsMoney	android.permission-group.MESSAGES	dangerous
+Allows the app to send requests to other messaging apps to handle respond-via-message events for incoming calls.	android.permission.SEND_RESPOND_VIA_MESSAGE		android.permission-group.MESSAGES	signature|system
+Allows the app to receive and process SMS messages. This means the app could monitor or delete messages sent to your device without showing them to you.	android.permission.RECEIVE_SMS		android.permission-group.MESSAGES	dangerous
+Allows the app to receive and process MMS messages. This means the app could monitor or delete messages sent to your device without showing them to you.	android.permission.RECEIVE_MMS		android.permission-group.MESSAGES	dangerous
+Allows the app to receive and process emergency broadcast messages. This permission is only available to system apps.	android.permission.RECEIVE_EMERGENCY_BROADCAST		android.permission-group.MESSAGES	signature|system
+Allows the app to read cell broadcast messages received by your device. Cell broadcast alerts are delivered in some locations to warn you of emergency situations. Malicious apps may interfere with the performance or operation of your device when an emergency cell broadcast is received.	android.permission.READ_CELL_BROADCASTS		android.permission-group.MESSAGES	dangerous
+Allows the app to read SMS messages stored on your tablet or SIM card. This allows the app to read all SMS messages, regardless of content or confidentiality.	android.permission.READ_SMS		android.permission-group.MESSAGES	dangerous
+Allows the app to write to SMS messages stored on your tablet or SIM card. Malicious apps may delete your messages.	android.permission.WRITE_SMS		android.permission-group.MESSAGES	dangerous
+Allows the app to receive and process WAP messages. This permission includes the ability to monitor or delete messages sent to you without showing them to you.	android.permission.RECEIVE_WAP_PUSH		android.permission-group.MESSAGES	dangerous
+Allows the app to read data about your contacts stored on your tablet, including the frequency with which you\'ve called, emailed, or communicated in other ways with specific individuals. This permission allows apps to save your contact data, and malicious apps may share contact data without your knowledge.	android.permission.READ_CONTACTS		android.permission-group.SOCIAL_INFO	dangerous
+Allows the app to modify the data about your contacts stored on your tablet, including the frequency with which you\'ve called, emailed, or communicated in other ways with specific contacts. This permission allows apps to delete contact data.	android.permission.WRITE_CONTACTS		android.permission-group.SOCIAL_INFO	dangerous
+	android.permission.BIND_DIRECTORY_SEARCH		android.permission-group.PERSONAL_INFO	signature|system
+Allows the app to read your tablet\'s call log, including data about incoming and outgoing calls. This permission allows apps to save your call log data, and malicious apps may share call log data without your knowledge.	android.permission.READ_CALL_LOG		android.permission-group.SOCIAL_INFO	dangerous
+Allows the app to modify your tablet\'s call log, including data about incoming and outgoing calls. Malicious apps may use this to erase or modify your call log.	android.permission.WRITE_CALL_LOG		android.permission-group.SOCIAL_INFO	dangerous
+Allows the app to access and sync social updates from you and your friends. Be careful when sharing information -- this allows the app to read communications between you and your friends on social networks, regardless of confidentiality. Note: this permission may not be enforced on all social networks.	android.permission.READ_SOCIAL_STREAM		android.permission-group.SOCIAL_INFO	dangerous
+Allows the app to display social updates from your friends. Be careful when sharing information -- this allows the app to produce messages that may appear to come from a friend. Note: this permission may not be enforced on all social networks.	android.permission.WRITE_SOCIAL_STREAM		android.permission-group.SOCIAL_INFO	dangerous
+Allows the app to read personal profile information stored on your device, such as your name and contact information. This means the app can identify you and may send your profile information to others.	android.permission.READ_PROFILE		android.permission-group.PERSONAL_INFO	dangerous
+Allows the app to change or add to personal profile information stored on your device, such as your name and contact information. This means the app can identify you and may send your profile information to others.	android.permission.WRITE_PROFILE		android.permission-group.PERSONAL_INFO	dangerous
+Allows the app to read all calendar events stored on your tablet, including those of friends or co-workers. This may allow the app to share or save your calendar data, regardless of confidentiality or sensitivity.	android.permission.READ_CALENDAR		android.permission-group.PERSONAL_INFO	dangerous
+Allows the app to add, remove, change events that you can modify on your tablet, including those of friends or co-workers. This may allow the app to send messages that appear to come from calendar owners, or modify events without the owners\' knowledge.	android.permission.WRITE_CALENDAR		android.permission-group.PERSONAL_INFO	dangerous
+Allows the app to read all words, names and phrases that the user may have stored in the user dictionary.	android.permission.READ_USER_DICTIONARY		android.permission-group.USER_DICTIONARY	dangerous
+Allows the app to write new words into the user dictionary.	android.permission.WRITE_USER_DICTIONARY		android.permission-group.WRITE_USER_DICTIONARY	normal
+Allows the app to read the history of all URLs that the Browser has visited, and all of the Browser\'s bookmarks. Note: this permission may not be enforced by third-party browsers or other applications with web browsing capabilities.	com.android.browser.permission.READ_HISTORY_BOOKMARKS		android.permission-group.BOOKMARKS	dangerous
+Allows the app to modify the Browser\'s history or bookmarks stored on your tablet. This may allow the app to erase or modify Browser data. Note: this permission may note be enforced by third-party browsers or other applications with web browsing capabilities.	com.android.browser.permission.WRITE_HISTORY_BOOKMARKS		android.permission-group.BOOKMARKS	dangerous
+Allows the app to set an alarm in an installed alarm clock app. Some alarm clock apps may not implement this feature.	com.android.alarm.permission.SET_ALARM		android.permission-group.DEVICE_ALARMS	normal
+Allows the app to add messages to your voicemail inbox.	com.android.voicemail.permission.ADD_VOICEMAIL		android.permission-group.VOICEMAIL	dangerous
+Allows the app to get your precise location using the Global Positioning System (GPS) or network location sources such as cell towers and Wi-Fi. These location services must be turned on and available to your device for the app to use them. Apps may use this to determine where you are, and may consume additional battery power.	android.permission.ACCESS_FINE_LOCATION		android.permission-group.LOCATION	dangerous
+Allows the app to get your approximate location. This location is derived by location services using network location sources such as cell towers and Wi-Fi. These location services must be turned on and available to your device for the app to use them. Apps may use this to determine approximately where you are.	android.permission.ACCESS_COARSE_LOCATION		android.permission-group.LOCATION	dangerous
+Create mock location sources for testing or install a new location provider. This allows the app to override the location and/or status returned by other location sources such as GPS or location providers.	android.permission.ACCESS_MOCK_LOCATION		android.permission-group.SYSTEM_TOOLS	dangerous
+Allows the app to access extra location provider commands. This may allow the app to to interfere with the operation of the GPS or other location sources.	android.permission.ACCESS_LOCATION_EXTRA_COMMANDS		android.permission-group.SYSTEM_TOOLS	normal
+Create mock location sources for testing or install a new location provider. This allows the app to override the location and/or status returned by other location sources such as GPS or location providers.	android.permission.INSTALL_LOCATION_PROVIDER			signature|system
+	android.permission.LOCATION_HARDWARE		android.permission-group.LOCATION	signature|system
+Allows the app to create network sockets and use custom network protocols. The browser and other applications provide means to send data to the internet, so this permission is not required to send data to the internet.	android.permission.INTERNET		android.permission-group.NETWORK	dangerous
+Allows the app to view information about network connections such as which networks exist and are connected.	android.permission.ACCESS_NETWORK_STATE		android.permission-group.NETWORK	normal
+Allows the app to view information about Wi-Fi networking, such as whether Wi-Fi is enabled and name of connected Wi-Fi devices.	android.permission.ACCESS_WIFI_STATE		android.permission-group.NETWORK	normal
+Allows the app to connect to and disconnect from Wi-Fi access points and to make changes to device configuration for Wi-Fi networks.	android.permission.CHANGE_WIFI_STATE		android.permission-group.NETWORK	dangerous
+Allows the app to determine whether WiMAX is enabled and information about any WiMAX networks that are connected. 	android.permission.ACCESS_WIMAX_STATE		android.permission-group.NETWORK	normal
+Allows the app to connect the tablet to and disconnect the tablet from WiMAX networks.	android.permission.CHANGE_WIMAX_STATE		android.permission-group.NETWORK	dangerous
+Allows the app to view the configuration of Bluetooth on the tablet, and to make and accept connections with paired devices.	android.permission.BLUETOOTH		android.permission-group.BLUETOOTH_NETWORK	dangerous
+Allows the app to configure the local Bluetooth tablet, and to discover and pair with remote devices.	android.permission.BLUETOOTH_ADMIN		android.permission-group.BLUETOOTH_NETWORK	dangerous
+Allows the app to pair with remote devices without user interaction.	android.permission.BLUETOOTH_PRIVILEGED		android.permission-group.BLUETOOTH_NETWORK	system|signature
+	android.permission.BLUETOOTH_STACK		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to communicate with Near Field Communication (NFC) tags, cards, and readers.	android.permission.NFC		android.permission-group.NETWORK	dangerous
+	android.permission.CONNECTIVITY_INTERNAL		android.permission-group.NETWORK	signature|system
+	android.permission.RECEIVE_DATA_ACTIVITY_CHANGE		android.permission-group.NETWORK	signature|system
+	android.permission.LOOP_RADIO		android.permission-group.NETWORK	signature|system
+Allows the app to get the list of accounts known by the tablet. This may include any accounts created by applications you have installed.	android.permission.GET_ACCOUNTS		android.permission-group.ACCOUNTS	normal
+Allows the app to use the account authenticator capabilities of the AccountManager, including creating accounts and getting and setting their passwords.	android.permission.AUTHENTICATE_ACCOUNTS		android.permission-group.ACCOUNTS	dangerous
+Allows the app to request authentication tokens.	android.permission.USE_CREDENTIALS		android.permission-group.ACCOUNTS	dangerous
+Allows the app to perform operations like adding and removing accounts, and deleting their password.	android.permission.MANAGE_ACCOUNTS		android.permission-group.ACCOUNTS	dangerous
+Allows the app to make calls to AccountAuthenticators.	android.permission.ACCOUNT_MANAGER		android.permission-group.ACCOUNTS	signature
+Allows the app to receive packets sent to all devices on a Wi-Fi network using multicast addresses, not just your tablet. It uses more power than the non-multicast mode.	android.permission.CHANGE_WIFI_MULTICAST_STATE		android.permission-group.AFFECTS_BATTERY	dangerous
+Allows the app to control the vibrator.	android.permission.VIBRATE		android.permission-group.AFFECTS_BATTERY	normal
+Allows the app to control the flashlight.	android.permission.FLASHLIGHT		android.permission-group.AFFECTS_BATTERY	normal
+Allows the app to prevent the tablet from going to sleep.	android.permission.WAKE_LOCK		android.permission-group.AFFECTS_BATTERY	normal
+Allows the app to use the tablet\'s infrared transmitter.	android.permission.TRANSMIT_IR		android.permission-group.AFFECTS_BATTERY	normal
+Allows the app to modify global audio settings such as volume and which speaker is used for output.	android.permission.MODIFY_AUDIO_SETTINGS		android.permission-group.AUDIO_SETTINGS	normal
+Allows the app to manage preferences and permissions for USB devices.	android.permission.MANAGE_USB		android.permission-group.HARDWARE_CONTROLS	signature|system
+Allows access to the kernel MTP driver to implement the MTP USB protocol.	android.permission.ACCESS_MTP		android.permission-group.HARDWARE_CONTROLS	signature|system
+Allows the app to control various peripherals for the purpose of hardware testing.	android.permission.HARDWARE_TEST		android.permission-group.HARDWARE_CONTROLS	signature
+	android.permission.NET_ADMIN		android.permission-group.SYSTEM_TOOLS	signature
+	android.permission.REMOTE_AUDIO_PLAYBACK		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to record audio with the microphone. This permission allows the app to record audio at any time without your confirmation.	android.permission.RECORD_AUDIO		android.permission-group.MICROPHONE	dangerous
+Allows the app to take pictures and videos with the camera. This permission allows the app to use the camera at any time without your confirmation.	android.permission.CAMERA		android.permission-group.CAMERA	dangerous
+Allows a pre-installed system application to disable the camera use indicator LED.	android.permission.CAMERA_DISABLE_TRANSMIT_LED		android.permission-group.CAMERA	signature|system
+Allows the app to process outgoing calls and change the number to be dialed. This permission allows the app to monitor, redirect, or prevent outgoing calls.	android.permission.PROCESS_OUTGOING_CALLS		android.permission-group.PHONE_CALLS	dangerous
+Allows the app to control the phone features of the device. An app with this permission can switch networks, turn the phone radio on and off and the like without ever notifying you.	android.permission.MODIFY_PHONE_STATE		android.permission-group.PHONE_CALLS	signature|system
+Allows the app to access the phone features of the device. This permission allows the app to determine the phone number and device IDs, whether a call is active, and the remote number connected by a call.	android.permission.READ_PHONE_STATE		android.permission-group.PHONE_CALLS	dangerous
+Allows the app to access the precise phone states. This permission allows the app to determine the real call status, whether a call is active or in the background, call fails, precise data connection status and data connection fails.	android.permission.READ_PRECISE_PHONE_STATE		android.permission-group.PHONE_CALLS	dangerous
+	android.permission.READ_PRIVILEGED_PHONE_STATE		android.permission-group.PHONE_CALLS	signature|system
+Allows the app to call phone numbers without your intervention. This may result in unexpected charges or calls. Note that this doesn\'t allow the app to call emergency numbers. Malicious apps may cost you money by making calls without your confirmation.	android.permission.CALL_PHONE	costsMoney	android.permission-group.PHONE_CALLS	dangerous
+Allows the app to use the SIP service to make/receive Internet calls.	android.permission.USE_SIP		android.permission-group.PHONE_CALLS	dangerous
+Allows the app to control when and how the user sees the in-call screen.	android.permission.BIND_CALL_SERVICE		android.permission-group.PHONE_CALLS	system|signature
+Allows the app to read the contents of your USB storage.	android.permission.READ_EXTERNAL_STORAGE		android.permission-group.STORAGE	normal
+Allows the app to write to the USB storage.	android.permission.WRITE_EXTERNAL_STORAGE		android.permission-group.STORAGE	dangerous
+Allows the app to modify the contents of the internal media storage.	android.permission.WRITE_MEDIA_STORAGE		android.permission-group.STORAGE	signature|system
+Allows the app to manage document storage.	android.permission.MANAGE_DOCUMENTS		android.permission-group.STORAGE	signature|system
+Allows the app to disable the keylock and any associated password security. For example, the phone disables the keylock when receiving an incoming phone call, then re-enables the keylock when the call is finished.	android.permission.DISABLE_KEYGUARD		android.permission-group.SCREENLOCK	dangerous
+Allows the app to retrieve information about currently and recently running tasks. This may allow the app to discover information about which applications are used on the device.	android.permission.GET_TASKS		android.permission-group.APP_INFO	dangerous
+Allows the app to perform actions across different users on the device. Malicious apps may use this to violate the protection between users.	android.permission.INTERACT_ACROSS_USERS		android.permission-group.SYSTEM_TOOLS	signature|system|development
+Allows all possible interactions across users.	android.permission.INTERACT_ACROSS_USERS_FULL		android.permission-group.SYSTEM_TOOLS	signature
+Allows apps to manage users on the device, including query, creation and deletion.	android.permission.MANAGE_USERS		android.permission-group.SYSTEM_TOOLS	signature|system
+Allows the app to retrieve detailed information about currently and recently running tasks. Malicious apps may discover private information about other apps.	android.permission.GET_DETAILED_TASKS		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to move tasks to the foreground and background. The app may do this without your input.	android.permission.REORDER_TASKS		android.permission-group.APP_INFO	normal
+Allows the app to remove tasks and kill their apps. Malicious apps may disrupt the behavior of other apps.	android.permission.REMOVE_TASKS		android.permission-group.APP_INFO	signature
+Allows the app to add, remove, and modify the activity stacks in which other apps run. Malicious apps may disrupt the behavior of other apps.	android.permission.MANAGE_ACTIVITY_STACKS		android.permission-group.APP_INFO	signature
+Allows the app to start any activity, regardless of permission protection or exported state.	android.permission.START_ANY_ACTIVITY		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to end background processes of other apps. This may cause other apps to stop running.	android.permission.RESTART_PACKAGES		android.permission-group.APP_INFO	normal
+Allows the app to end background processes of other apps. This may cause other apps to stop running.	android.permission.KILL_BACKGROUND_PROCESSES		android.permission-group.APP_INFO	normal
+Allows the app to draw on top of other applications or parts of the user interface. They may interfere with your use of the interface in any application, or change what you think you are seeing in other applications.	android.permission.SYSTEM_ALERT_WINDOW		android.permission-group.DISPLAY	dangerous
+Allows the app to set the system wallpaper.	android.permission.SET_WALLPAPER		android.permission-group.WALLPAPER	normal
+Allows the app to set the system wallpaper size hints.	android.permission.SET_WALLPAPER_HINTS		android.permission-group.WALLPAPER	normal
+Allows the app to change the tablet\'s clock time.	android.permission.SET_TIME			signature|system
+Allows the app to change the tablet\'s time zone.	android.permission.SET_TIME_ZONE		android.permission-group.SYSTEM_CLOCK	normal
+Allows the app to expand or collapse the status bar.	android.permission.EXPAND_STATUS_BAR		android.permission-group.STATUS_BAR	normal
+Allows an application to add Homescreen shortcuts without user intervention.	com.android.launcher.permission.INSTALL_SHORTCUT		android.permission-group.SYSTEM_TOOLS	dangerous
+Allows the application to remove Homescreen shortcuts without user intervention.	com.android.launcher.permission.UNINSTALL_SHORTCUT		android.permission-group.SYSTEM_TOOLS	dangerous
+Allows the app to read the sync settings for an account. For example, this can determine whether the People app is synced with an account.	android.permission.READ_SYNC_SETTINGS		android.permission-group.SYNC_SETTINGS	normal
+Allows an app to modify the sync settings for an account. For example, this can be used to enable sync of the People app with an account.	android.permission.WRITE_SYNC_SETTINGS		android.permission-group.SYNC_SETTINGS	normal
+Allows an app to read the sync stats for an account, including the history of sync events and how much data is synced. 	android.permission.READ_SYNC_STATS		android.permission-group.SYNC_SETTINGS	normal
+Allows the app to control the screen compatibility mode of other applications. Malicious applications may break the behavior of other applications.	android.permission.SET_SCREEN_COMPATIBILITY		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to access external storage for all users.	android.permission.ACCESS_ALL_EXTERNAL_STORAGE		android.permission-group.DEVELOPMENT_TOOLS	signature
+Allows the app to change the current configuration, such as the locale or overall font size.	android.permission.CHANGE_CONFIGURATION		android.permission-group.DEVELOPMENT_TOOLS	signature|system|development
+Allows the app to modify the system\'s settings data. Malicious apps may corrupt your system\'s configuration.	android.permission.WRITE_SETTINGS		android.permission-group.SYSTEM_TOOLS	normal
+Allows the app to modify the Google services map. Not for use by normal apps.	android.permission.WRITE_GSERVICES			signature|system
+Allows the app to forcibly stop other apps.	android.permission.FORCE_STOP_PACKAGES		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to retrieve the content of the active window. Malicious apps may retrieve the entire window content and examine all its text except passwords.	android.permission.RETRIEVE_WINDOW_CONTENT		android.permission-group.PERSONAL_INFO	signature|system
+Allows the app to change the global animation speed (faster or slower animations) at any time.	android.permission.SET_ANIMATION_SCALE		android.permission-group.SYSTEM_TOOLS	signature|system|development
+Allows the app to make parts of itself persistent in memory. This can limit memory available to other apps slowing down the tablet.	android.permission.PERSISTENT_ACTIVITY		android.permission-group.APP_INFO	normal
+Allows the app to retrieve its code, data, and cache sizes	android.permission.GET_PACKAGE_SIZE		android.permission-group.SYSTEM_TOOLS	normal
+Allows the app to modify your preferred apps. Malicious apps may silently change the apps that are run, spoofing your existing apps to collect private data from you.	android.permission.SET_PREFERRED_APPLICATIONS		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to have itself started as soon as the system has finished booting. This can make it take longer to start the tablet and allow the app to slow down the overall tablet by always running.	android.permission.RECEIVE_BOOT_COMPLETED		android.permission-group.APP_INFO	normal
+Allows the app to send sticky broadcasts, which remain after the broadcast ends. Excessive use may make the tablet slow or unstable by causing it to use too much memory. 	android.permission.BROADCAST_STICKY		android.permission-group.SYSTEM_TOOLS	normal
+Allows the app to mount and unmount filesystems for removable storage.	android.permission.MOUNT_UNMOUNT_FILESYSTEMS		android.permission-group.SYSTEM_TOOLS	system|signature
+Allows the app to format removable storage.	android.permission.MOUNT_FORMAT_FILESYSTEMS		android.permission-group.SYSTEM_TOOLS	system|signature
+Allows the app to get information on internal storage.	android.permission.ASEC_ACCESS		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to create internal storage.	android.permission.ASEC_CREATE		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to destroy internal storage.	android.permission.ASEC_DESTROY		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to mount/unmount internal storage.	android.permission.ASEC_MOUNT_UNMOUNT		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to rename internal storage.	android.permission.ASEC_RENAME		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to change network settings and to intercept and inspect all network traffic, for example to change the proxy and port of any APN. Malicious apps may monitor, redirect, or modify network packets without your knowledge.	android.permission.WRITE_APN_SETTINGS		android.permission-group.SYSTEM_TOOLS	signature|system
+Allows the app to get details about the currently synced feeds.	android.permission.SUBSCRIBED_FEEDS_READ		android.permission-group.SYSTEM_TOOLS	normal
+Allows the app to modify your currently synced feeds. Malicious apps may change your synced feeds.	android.permission.SUBSCRIBED_FEEDS_WRITE		android.permission-group.SYSTEM_TOOLS	dangerous
+Allows the app to change the state of network connectivity.	android.permission.CHANGE_NETWORK_STATE		android.permission-group.NETWORK	normal
+Allows the app to free tablet storage by deleting files in the cache directories of other applications. This may cause other applications to start up more slowly as they need to re-retrieve their data.	android.permission.CLEAR_APP_CACHE		android.permission-group.SYSTEM_TOOLS	dangerous
+Allows the app to use any installed media decoder to decode for playback.	android.permission.ALLOW_ANY_CODEC_FOR_PLAYBACK			signature|system
+Allows the app to install and uninstall CA certificates as trusted credentials.	android.permission.MANAGE_CA_CERTIFICATES			signature|system
+Allows the app to modify the system\'s secure settings data. Not for use by normal apps.	android.permission.WRITE_SECURE_SETTINGS		android.permission-group.DEVELOPMENT_TOOLS	signature|system|development
+Allows the app to retrieve internal state of the system. Malicious apps may retrieve a wide variety of private and secure information that they should never normally need.	android.permission.DUMP		android.permission-group.DEVELOPMENT_TOOLS	signature|system|development
+Allows the app to read from the system\'s various log files. This allows it to discover general information about what you are doing with the tablet, potentially including personal or private information.	android.permission.READ_LOGS		android.permission-group.DEVELOPMENT_TOOLS	signature|system|development
+Allows the app to turn on debugging for another app. Malicious apps may use this to kill other apps.	android.permission.SET_DEBUG_APP		android.permission-group.DEVELOPMENT_TOOLS	signature|system|development
+Allows the app to control the maximum number of processes that will run. Never needed for normal apps.	android.permission.SET_PROCESS_LIMIT		android.permission-group.DEVELOPMENT_TOOLS	signature|system|development
+Allows the app to control whether activities are always finished as soon as they go to the background. Never needed for normal apps.	android.permission.SET_ALWAYS_FINISH		android.permission-group.DEVELOPMENT_TOOLS	signature|system|development
+Allows the app to request that the supplied signal be sent to all persistent processes.	android.permission.SIGNAL_PERSISTENT_PROCESSES		android.permission-group.DEVELOPMENT_TOOLS	signature|system|development
+Allows the app to read and write to any resource owned by the diag group; for example, files in /dev. This could potentially affect system stability and security. This should be ONLY be used for hardware-specific diagnostics by the manufacturer or operator.	android.permission.DIAGNOSTIC		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to disable the status bar or add and remove system icons.	android.permission.STATUS_BAR			signature|system
+Allows the app to be the status bar.	android.permission.STATUS_BAR_SERVICE			signature
+Allows the app to force any activity that is in the foreground to close and go back. Should never be needed for normal apps.	android.permission.FORCE_BACK			signature
+Allows the app to modify collected battery statistics. Not for use by normal apps.	android.permission.UPDATE_DEVICE_STATS			signature|system
+Allows the app to retrieve collected application operation statistics. Not for use by normal apps.	android.permission.GET_APP_OPS_STATS		android.permission-group.SYSTEM_TOOLS	signature|system|development
+Allows the app to modify collected application operation statistics. Not for use by normal apps.	android.permission.UPDATE_APP_OPS_STATS			signature|system
+Allows the app to create windows that are intended to be used by the internal system user interface. Not for use by normal apps.	android.permission.INTERNAL_SYSTEM_WINDOW			signature
+Allows the app to create and manage their own tokens, bypassing their normal Z-ordering. Should never be needed for normal apps.	android.permission.MANAGE_APP_TOKENS			signature
+Allows the application to temporarily freeze the screen for a full-screen transition.	android.permission.FREEZE_SCREEN			signature
+Allows the app to deliver its own input events (key presses, etc.) to other apps. Malicious apps may use this to take over the tablet.	android.permission.INJECT_EVENTS			signature
+Allows an application to register an input filter which filters the stream of all user events before they are dispatched. Malicious app may control the system UI whtout user intervention.	android.permission.FILTER_EVENTS			signature
+Allows an application to retrieve information about the the windows from the window manager. Malicious apps may retrieve information that is intended for internal system usage.	android.permission.RETRIEVE_WINDOW_INFO			signature
+Allows an application to temporarily enable accessibility on the device. Malicious apps may enable accessibility without user consent.	android.permission.TEMPORARY_ENABLE_ACCESSIBILITY			signature
+Allows an application to magnify the content of a display. Malicious apps may transform the display content in a way that renders the device unusable.	android.permission.MAGNIFY_DISPLAY			signature
+Allows the app to monitor and control how the system launches activities. Malicious apps may completely compromise the system. This permission is only needed for development, never for normal use.	android.permission.SET_ACTIVITY_WATCHER			signature
+Puts the activity manager into a shutdown state. Does not perform a complete shutdown.	android.permission.SHUTDOWN			signature|system
+Prevents the user from switching to another app.	android.permission.STOP_APP_SWITCHES			signature|system
+Allows the holder to retrieve private information about the current application in the foreground of the screen.	android.permission.GET_TOP_ACTIVITY_INFO			signature
+Allows the app to watch the keys you press even when interacting with another app (such as typing a password). Should never be needed for normal apps.	android.permission.READ_INPUT_STATE			signature
+Allows the holder to bind to the top-level interface of an input method. Should never be needed for normal apps.	android.permission.BIND_INPUT_METHOD			signature
+Allows the holder to bind to the top-level interface of an accessibility service. Should never be needed for normal apps.	android.permission.BIND_ACCESSIBILITY_SERVICE			signature
+Allows the holder to bind to the top-level interface of a print service. Should never be needed for normal apps.	android.permission.BIND_PRINT_SERVICE			signature
+Allows the holder to bind to applications that are emulating NFC cards. Should never be needed for normal apps.	android.permission.BIND_NFC_SERVICE			signature
+Allows the holder to bind to the top-level interface of a print spooler service. Should never be needed for normal apps.	android.permission.BIND_PRINT_SPOOLER_SERVICE			signature
+Allows the holder to bind to the top-level interface of a text service(e.g. SpellCheckerService). Should never be needed for normal apps.	android.permission.BIND_TEXT_SERVICE			signature
+Allows the holder to bind to the top-level interface of a Vpn service. Should never be needed for normal apps.	android.permission.BIND_VPN_SERVICE			signature
+Allows the holder to bind to the top-level interface of a wallpaper. Should never be needed for normal apps.	android.permission.BIND_WALLPAPER			signature|system
+Allows the holder to bind to the top-level interface of a remote display. Should never be needed for normal apps.	android.permission.BIND_REMOTE_DISPLAY			signature
+Allows the holder to send intents to a device administrator. Should never be needed for normal apps.	android.permission.BIND_DEVICE_ADMIN			signature
+Allows the holder to add or remove active device administrators. Should never be needed for normal apps.	android.permission.MANAGE_DEVICE_ADMINS			signature|system
+Allows the app to change the rotation of the screen at any time. Should never be needed for normal apps.	android.permission.SET_ORIENTATION			signature
+Allows the app to change the mouse or trackpad pointer speed at any time. Should never be needed for normal apps.	android.permission.SET_POINTER_SPEED			signature
+Allows the app to change the keyboard layout. Should never be needed for normal apps.	android.permission.SET_KEYBOARD_LAYOUT			signature
+Allows the app to install new or updated Android packages. Malicious apps may use this to add new apps with arbitrarily powerful permissions.	android.permission.INSTALL_PACKAGES			signature|system
+Allows the app to clear user data.	android.permission.CLEAR_APP_USER_DATA			signature
+Allows the app to delete cache files.	android.permission.DELETE_CACHE_FILES			signature|system
+Allows the app to delete Android packages. Malicious apps may use this to delete important apps.	android.permission.DELETE_PACKAGES			signature|system
+Allows the app to move app resources from internal to external media and vice versa.	android.permission.MOVE_PACKAGE			signature|system
+Allows the app to change whether a component of another app is enabled or not. Malicious apps may use this to disable important tablet capabilities. Care must be used with this permission, as it is possible to get app components into an unusable, inconsistent, or unstable state. 	android.permission.CHANGE_COMPONENT_ENABLED_STATE			signature|system
+Allows an application to grant or revoke specific permissions for it or other applications. Malicious applications may use this to access features you have not granted them. 	android.permission.GRANT_REVOKE_PERMISSIONS			signature
+Allows the app to use SurfaceFlinger low-level features.	android.permission.ACCESS_SURFACE_FLINGER			signature
+Allows the app to read the content of the frame buffer.	android.permission.READ_FRAME_BUFFER			signature|system
+Allows the app to configure and connect to Wifi displays.	android.permission.CONFIGURE_WIFI_DISPLAY			signature
+Allows the app to control low-level features of Wifi displays.	android.permission.CONTROL_WIFI_DISPLAY			signature
+Allows the app to capture and redirect audio output.	android.permission.CAPTURE_AUDIO_OUTPUT			signature|system
+Allows the app to capture audio for Hotword detection. The capture can happen in the background but does not prevent other audio capture (e.g. Camcorder).	android.permission.CAPTURE_AUDIO_HOTWORD			signature|system
+Allows the app to capture and redirect video output.	android.permission.CAPTURE_VIDEO_OUTPUT			signature|system
+Allows the app to capture and redirect secure video output.	android.permission.CAPTURE_SECURE_VIDEO_OUTPUT			signature|system
+Allows the app to control media playback and access the media information (title, author...).	android.permission.MEDIA_CONTENT_CONTROL			signature|system
+Allows the app to disable the entire tablet permanently. This is very dangerous.	android.permission.BRICK			signature
+Allows the app to force the tablet to reboot.	android.permission.REBOOT			signature|system
+Allows the app to turn the tablet on or off.	android.permission.DEVICE_POWER			signature
+	android.permission.NET_TUNNELING		android.permission-group.SYSTEM_TOOLS	signature
+Run as a low-level manufacturer test, allowing complete access to the tablet hardware. Only available when a tablet is running in manufacturer test mode.	android.permission.FACTORY_TEST			signature
+Allows the app to broadcast a notification that an app package has been removed. Malicious apps may use this to kill any other running app.	android.permission.BROADCAST_PACKAGE_REMOVED		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to broadcast a notification that an SMS message has been received. Malicious apps may use this to forge incoming SMS messages.	android.permission.BROADCAST_SMS		android.permission-group.MESSAGES	signature
+Allows the app to broadcast a notification that a WAP PUSH message has been received. Malicious apps may use this to forge MMS message receipt or to silently replace the content of any webpage with malicious variants.	android.permission.BROADCAST_WAP_PUSH		android.permission-group.MESSAGES	signature
+Allows the app to completely reset the system to its factory settings, erasing all data, configuration, and installed apps.	android.permission.MASTER_CLEAR			signature|system
+Allows the app to call any phone number, including emergency numbers, without your intervention. Malicious apps may place unnecessary and illegal calls to emergency services.	android.permission.CALL_PRIVILEGED			signature|system
+Allows the app to start CDMA provisioning. Malicious apps may unnecessarily start CDMA provisioning.	android.permission.PERFORM_CDMA_PROVISIONING			signature|system
+Allows the app to enable/disable location update notifications from the radio. Not for use by normal apps.	android.permission.CONTROL_LOCATION_UPDATES			signature|system
+Allows the app read/write access to properties uploaded by the checkin service. Not for use by normal apps.	android.permission.ACCESS_CHECKIN_PROPERTIES			signature|system
+Allows the app to modify collected component usage statistics. Not for use by normal apps.	android.permission.PACKAGE_USAGE_STATS			signature|system
+Allows an application to read the current low-level battery use data. May allow the application to find out detailed information about which apps you use.	android.permission.BATTERY_STATS		android.permission-group.SYSTEM_TOOLS	signature|system
+Allows the app to control the system\'s backup and restore mechanism. Not for use by normal apps.	android.permission.BACKUP			signature|system
+Allows the app to launch the full backup confirmation UI. Not to be used by any app.	android.permission.CONFIRM_FULL_BACKUP			signature
+Allows the holder to bind to the top-level interface of a widget service. Should never be needed for normal apps.	android.permission.BIND_REMOTEVIEWS			signature|system
+Allows the app to tell the system which widgets can be used by which app. An app with this permission can give access to personal data to other apps. Not for use by normal apps.	android.permission.BIND_APPWIDGET		android.permission-group.PERSONAL_INFO	signature|system
+	android.permission.BIND_KEYGUARD_APPWIDGET		android.permission-group.PERSONAL_INFO	signature|system
+	android.permission.MODIFY_APPWIDGET_BIND_PERMISSIONS		android.permission-group.SYSTEM_TOOLS	signature|system
+Allows the app to change the background data usage setting.	android.permission.CHANGE_BACKGROUND_DATA_SETTING		android.permission-group.SYSTEM_TOOLS	signature
+	android.permission.GLOBAL_SEARCH		android.permission-group.SYSTEM_TOOLS	signature|system
+	android.permission.GLOBAL_SEARCH_CONTROL		android.permission-group.SYSTEM_TOOLS	signature
+	android.permission.SET_WALLPAPER_COMPONENT		android.permission-group.SYSTEM_TOOLS	signature|system
+	android.permission.READ_DREAM_STATE		android.permission-group.SYSTEM_TOOLS	signature
+	android.permission.WRITE_DREAM_STATE		android.permission-group.SYSTEM_TOOLS	signature
+Allows the app to read and write the cache filesystem.	android.permission.ACCESS_CACHE_FILESYSTEM			signature|system
+copy content	android.permission.COPY_PROTECTED_DATA			signature
+	android.permission.CRYPT_KEEPER			signature|system
+Allows the app to read historical network usage for specific networks and apps.	android.permission.READ_NETWORK_USAGE_HISTORY			signature|system
+Allows the app to manage network policies and define app-specific rules.	android.permission.MANAGE_NETWORK_POLICY			signature
+Allows the app to modify how network usage is accounted against apps. Not for use by normal apps.	android.permission.MODIFY_NETWORK_ACCOUNTING			signature|system
+Allows the app to modify socket marks for routing	android.permission.MARK_NETWORK_SOCKET			signature|system
+	android.intent.category.MASTER_CLEAR.permission.C2D_MESSAGE			signature
+Allows the app to verify a package is installable.	android.permission.PACKAGE_VERIFICATION_AGENT			signature|system
+Allows the holder to make requests of package verifiers. Should never be needed for normal apps.	android.permission.BIND_PACKAGE_VERIFIER			signature
+Allows the holder to access serial ports using the SerialManager API.	android.permission.SERIAL_PORT			signature|system
+Allows the holder to access content providers from the shell. Should never be needed for normal apps.	android.permission.ACCESS_CONTENT_PROVIDERS_EXTERNALLY			signature
+Allows the holder to offer information to the system about when would be a good time for a noninteractive reboot to upgrade the device.	android.permission.UPDATE_LOCK			signatureOrSystem
+Allows the app to retrieve, examine, and clear notifications, including those posted by other apps.	android.permission.ACCESS_NOTIFICATIONS			signature|system
+Allows an application to access keguard secure storage.	android.permission.ACCESS_KEYGUARD_SECURE_STORAGE			signature
+Allows an application to control keguard.	android.permission.CONTROL_KEYGUARD			signature
+Allows the holder to bind to the top-level interface of a notification listener service. Should never be needed for normal apps.	android.permission.BIND_NOTIFICATION_LISTENER_SERVICE			signature
+Allows the holder to invoke the carrier-provided configuration app. Should never be needed for normal apps.	android.permission.INVOKE_CARRIER_SETUP			signature|system
+Allows an application to listen for observations on network conditions. Should never be needed for normal apps.	android.permission.ACCESS_NETWORK_CONDITIONS			signature|system
