@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import numpy as np
 import json
 import random
+import pandas as pd
 
 db = MongoClient("localhost", 27017)['privacygrading']
 rateTablePath = ("/home/lsuper/projects/privacyGradePipeline/privacyRating/data/avgCrowdSourceResult.csv")
@@ -64,6 +65,16 @@ def generateHistData(slotSize, outputFile, originalData = []):
     for i in range(1, len(slots)):
         print >> outputFile, slots[i], ',', resultList[i] - resultList[i-1]
 
+def getQuantile():
+#simple method to get slots
+  originalData = []
+  for entry in db.packagePair.find():
+    originalData.append(entry['rate'])
+  df = pd.DataFrame(originalData)
+  df = df[df[0] < 0.0].reset_index(drop=True)
+  slots = [df[0].quantile(0.25), df[0].quantile(0.5), df[0].quantile(0.75), df[0].quantile(1.0)] 
+  return slots
+
 #This method transit rate to level [)
 #slots and level for only minus pairs summation, max is 0; A-D
 #slots = [-0.5863992984, -0.29319964921, -0.0225538192, 0.0225538192], level = ['D', 'C', 'B', 'A']
@@ -72,7 +83,9 @@ def generateHistData(slotSize, outputFile, originalData = []):
 #slots = [-4.479481834, -2.900681466, -0.7016380962, -0.3069380042, -0.0813950945, 0.0877620878, 1.159090909], level = ['F', 'E', 'D', 'C', 'B', 'A']
 #slots = [-0.5863992984, -0.29319964921, -0.0225538192, 0.0225538192]
 #slots = [-0.7752027885, -0.1033603718, -0.02584009295, 0.02584009295] #20140218
-slots = [-0.5746956041, -0.2947156944, -0.01473578472, 0.01473578472]
+#slots = [-0.5746956041, -0.2947156944, -0.01473578472, 0.01473578472]
+#using new grading scheme, evenly split apps with negative scores
+slots = getQuantile()
 levels = ['D', 'C', 'B', 'A']
 def transRateToLevel(slots = slots, levels = levels):
     lower = min(slots) - 1
