@@ -128,7 +128,7 @@ if __name__ == "__main__":
     #extractPackagePair(updatedApkList[907942:])
     transRateToLevel()
     now = datetime.datetime.now()
-    histFileName =  now.strftime("%Y%m%d") + ".csv"
+    histFileName =  "hist_" + now.strftime("%Y%m%d") + ".csv"
     outputHistogramFile = open("/home/lsuper/projects/privacyGradePipeline/privacyRating/data/hist/" + histFileName, 'w')
     generateHistData(200, outputHistogramFile)
     outputHistogramFile.close()
