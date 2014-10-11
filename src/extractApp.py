@@ -1,14 +1,9 @@
 from MySQLdb import connect
-
-from pymongo import MongoClient
+from dbConfig import dbStaticAnalysis, dbPrivacyGrading, dbAndroidApp 
 from rateApp import calculateRateforOneApp, transRateToLevel, generateHistData, getLevel
 
 import sys
-
-dbStaticAnalysis = MongoClient("localhost", 27017)['staticAnalysis']
-dbPrivacyGrading = MongoClient("localhost", 27017)['privacygrading']
-dbAndroidApp = MongoClient("localhost", 27017)['androidApp']
-
+import datetime
 
 #this is deprecated.
 def directFromMysql():
@@ -74,8 +69,10 @@ def copyfromMysql():
 #this is used to build packagePair table
 def extractPackagePair(updatedApkList):
     labeledPackageDict = {entry['externalpack']: entry['apitype'] for entry in dbPrivacyGrading.labeled3rdparty.find({}, {'externalpack':1, 'apitype':1})}
-    #the following two lines is extracting app from updated app list, which is generated from static analysis code
+    cnt = 0
     for packagename in updatedApkList:
+      cnt += 1
+      print cnt
       #make sure permission in apkInfo is the version analyzed. Do not update apkInfo before extractApp.py run
       apkInfoEntry = dbAndroidApp.apkInfo.find_one({'packageName':packagename}, {'permission':1, 'updatedTimestamp':1})
       updatedTimestamp =  apkInfoEntry['updatedTimestamp']
@@ -107,15 +104,12 @@ def extractPackagePair(updatedApkList):
           purposeSet = labeledPermissionPurposesDict.get(entry["permission"], set()) | set([purpose])
           labeledPermissionPurposesDict.update({entry["permission"]: purposeSet})
                
-          #print purpose, appEntry
       rate, negativePermissionPurposeDict = calculateRateforOneApp(labeledPermissionPurposesDict) 
       packagePairEntry = {'packagename': packagename, 'labeledPermissionPurposesPairs': {key: list(value) for key, value in labeledPermissionPurposesDict.iteritems()}, 'permissionExternalPackagesPairs': {key: list(value) for key, value in permissionExternalPackageDict.iteritems()}, 'negativePermissionPurposesPairs': {key: list(value) for key, value in negativePermissionPurposeDict.iteritems()}, 'manifestPermissions': manifestPermissions, 'updatedTimestamp' : updatedTimestamp}
       packagePairEntry['rate'] = rate
-      packagePairEntry['level'] = getLevel(rate) 
-
+      
       dbPrivacyGrading.packagePair.update({'packagename': packagename}, packagePairEntry, upsert=True)
         
-
 
 if __name__ == "__main__":
     updatedApkList = [] 
@@ -130,8 +124,11 @@ if __name__ == "__main__":
             updatedApkList.append(packagename)
         updatedApkListFile.close()
         
-    extractPackagePair(updatedApkList)
+    #assert updatedApkList[907942] == "com.muguercia.noticias"
+    #extractPackagePair(updatedApkList[907942:])
     transRateToLevel()
-    outputHistogramFile = open(sys.argv[2], 'w')
+    now = datetime.datetime.now()
+    histFileName =  now.strftime("%Y%m%d") + ".csv"
+    outputHistogramFile = open("/home/lsuper/projects/privacyGradePipeline/privacyRating/data/hist/" + histFileName, 'w')
     generateHistData(200, outputHistogramFile)
     outputHistogramFile.close()

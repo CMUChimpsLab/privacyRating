@@ -1,13 +1,19 @@
-from pymongo import MongoClient
 import numpy as np
 import json
 import random
 import pandas as pd
+from dbConfig import dbPrivacyGrading
 
-db = MongoClient("localhost", 27017)['privacygrading']
+db = dbPrivacyGrading 
+"""
+deprecated with func getRateTable
+"""
 rateTablePath = ("/home/lsuper/projects/privacyGradePipeline/privacyRating/data/avgCrowdSourceResult.csv")
 
 def getRateTable(rateTablePath = rateTablePath):
+    """
+    deprecated function, used to get Jialiu aggregated result
+    """
     f = open(rateTablePath)
     titles = f.readline().strip().split(",")
     rateTable = {}
@@ -16,6 +22,12 @@ def getRateTable(rateTablePath = rateTablePath):
         rateTable[rateList[0]] = {titles[index]: float(rateList[index]) for index in range(1,len(rateList))}
     return rateTable
 
+"""
+use data from /home/lsuper/projects/privacyGradePrediction/data/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv 
+calculate average score
+"""
+responseDf = pd.read_csv("/home/lsuper/projects/privacyGradePrediction/data/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv", sep ="\t")
+scoreDf = responseDf.groupby(["permission", "purpose"])["comfortScore"].mean().reset_index()
 #calculate Rate for all entry in packagePair table in one loop
 def calculateRate(rateTablePath = rateTablePath):
     rateDict = {}
@@ -27,17 +39,19 @@ def calculateRate(rateTablePath = rateTablePath):
     return rateDict
 
 #calculate Rate for one entry each time; also return negativePermissioniPurposeDict
-def calculateRateforOneApp(labeledPermissionPurposesDict, rateTable = getRateTable(rateTablePath)):
-  rate = 0
-  negativePermissionPurposeDict = {}
-  for permissionPattern in rateTable:
-      for permission, purposeSet in labeledPermissionPurposesDict.iteritems():
-          if permission.find(permissionPattern) != -1:
-              negativePurposeSet = set([purpose for purpose in purposeSet if rateTable[permissionPattern].get(purpose, 0) < 0])
-              negativePermissionPurposeDict.update({permission: negativePermissionPurposeDict.get(permission, set()) | set(negativePurposeSet)})   
-              rateList = [rateTable[permissionPattern].get(purpose, 0) for purpose in negativePurposeSet]
-              rate += sum(rateList)
-  return rate, negativePermissionPurposeDict
+def calculateRateforOneApp(labeledPermissionPurposesDict, scoreDf = scoreDf):
+    rate = 0
+    negativePermissionPurposeDict = {}
+    for permission, purposeSet in labeledPermissionPurposesDict.iteritems():
+        negativePurposeSet = set()
+        for purpose in purposeSet:
+            score = scoreDf[(scoreDf["permission"] == permission) & (scoreDf["purpose"] == purpose)]["comfortScore"] 
+            assert score.size <= 1
+            if score.size == 1 and score.iloc[0] < 0:
+                rate += score.iloc[0]
+                negativePurposeSet.add(purpose)
+        negativePermissionPurposeDict.update({permission: negativePurposeSet})   
+    return rate, negativePermissionPurposeDict
 
 #a utility function for generating histogram 
 def generateHistData(slotSize, outputFile, originalData = []):
@@ -66,14 +80,14 @@ def generateHistData(slotSize, outputFile, originalData = []):
         print >> outputFile, slots[i], ',', resultList[i] - resultList[i-1]
 
 def getQuantile():
-#simple method to get slots
-  originalData = []
-  for entry in db.packagePair.find():
-    originalData.append(entry['rate'])
-  df = pd.DataFrame(originalData)
-  df = df[df[0] < 0.0].reset_index(drop=True)
-  slots = [df[0].quantile(0.25), df[0].quantile(0.5), df[0].quantile(0.75), df[0].quantile(1.0)] 
-  return slots
+    #simple method to get slots
+    originalData = []
+    for entry in db.packagePair.find():
+      originalData.append(entry['rate'])
+    df = pd.DataFrame(originalData)
+    df = df[df[0] < 0.0].reset_index(drop=True)
+    slots = [df[0].quantile(0.25), df[0].quantile(0.5), df[0].quantile(0.75), df[0].quantile(1.0)] 
+    return slots
 
 #This method transit rate to level [)
 #slots and level for only minus pairs summation, max is 0; A-D
@@ -85,9 +99,8 @@ def getQuantile():
 #slots = [-0.7752027885, -0.1033603718, -0.02584009295, 0.02584009295] #20140218
 #slots = [-0.5746956041, -0.2947156944, -0.01473578472, 0.01473578472]
 #using new grading scheme, evenly split apps with negative scores
-slots = getQuantile()
 levels = ['D', 'C', 'B', 'A']
-def transRateToLevel(slots = slots, levels = levels):
+def transRateToLevel(slots = getQuantile(), levels = levels):
     lower = min(slots) - 1
     upper = slots[0]
     for index in range(len(slots)):
@@ -98,7 +111,8 @@ def transRateToLevel(slots = slots, levels = levels):
     db.packagePair.update({'rate': {'$lt': slots[0]}}, {'$set': {'level': levels[0]}}, multi=True)
 
 #this method is for extractApp.extractPackagePair to use for each entry
-def getLevel(rate, slots = slots, levels = levels):
+#Should not be used, since the slots can only be decided after rating each app, not during rating
+def getLevel(rate, slots = None, levels = levels):
   if rate < slots[0]:
       return levels[0]
   if rate >= slots[-1]:
