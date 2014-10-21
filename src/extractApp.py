@@ -124,8 +124,6 @@ if __name__ == "__main__":
             updatedApkList.append(packagename)
         updatedApkListFile.close()
         
-    #assert updatedApkList[907942] == "com.muguercia.noticias"
-    #extractPackagePair(updatedApkList[907942:])
     transRateToLevel()
     now = datetime.datetime.now()
     histFileName =  "hist_" + now.strftime("%Y%m%d") + ".csv"
