@@ -89,6 +89,18 @@ def getQuantile():
     slots = [df[0].quantile(0.25), df[0].quantile(0.5), df[0].quantile(0.75), df[0].quantile(1.0)] 
     return slots
 
+def updateForAPlus():
+    """
+    We decided to add an A+ grade on Oct. 21, 2014
+    We get a list from ../data/permissionList.csv, which stored in ../data/sensitivePermissionsList 
+    These permissions are marked with dangerous by Google
+    If an app does not request any sensitive permissions from this list, we grade it with A+ 
+
+    This method will be used by transRateToLevel method
+    """
+    sensitivePermissionList = ["READ_USER_DICTIONARY", "READ_SMS", "WRITE_SOCIAL_STREAM", "RECEIVE_MMS", "SUBSCRIBED_FEEDS_WRITE", "WRITE_HISTORY_BOOKMARKS", "BIND_VPN_SERVICE", "CLEAR_APP_CACHE", "USE_CREDENTIALS", "KILL_BACKGROUND_PROCESSES", "PROCESS_OUTGOING_CALLS", "CHANGE_NETWORK_STATE", "READ_PROFILE", "WRITE_EXTERNAL_STORAGE", "UNINSTALL_SHORTCUT", "ADD_VOICEMAIL", "BIND_NFC_SERVICE", "BLUETOOTH_ADMIN", "CHANGE_WIFI_MULTICAST_STATE", "WRITE_CALL_LOG", "WRITE_CALENDAR", "CHANGE_WIMAX_STATE", "NFC", "WRITE_CONTACTS", "READ_CELL_BROADCASTS", "READ_PRECISE_PHONE_STATE", "READ_SOCIAL_STREAM", "USE_SIP", "READ_HISTORY_BOOKMARKS", "INSTALL_SHORTCUT", "RECEIVE_WAP_PUSH", "READ_CALENDAR", "WRITE_PROFILE", "BIND_DEVICE_ADMIN", "BLUETOOTH_STACK", "BRICK", "WRITE_SMS", "INTERNET", "CHANGE_WIFI_STATE", "AUTHENTICATE_ACCOUNTS", "BLUETOOTH", "ACCESS_MOCK_LOCATION", "READ_CONTACTS", "READ_CALL_LOG", "RECEIVE_SMS", "MANAGE_ACCOUNTS", "SYSTEM_ALERT_WINDOW", "GET_TASKS", "DISABLE_KEYGUARD", "RECORD_AUDIO", "GET_ACCOUNTS", "ACCESS_COARSE_LOCATION", "READ_PHONE_STATE", "ACCESS_FINE_LOCATION", "CALL_PHONE", "CAMERA", "SEND_SMS"]
+    db.packagePair.update({"manifestPermissions": {'$nin':sensitivePermissionList}}, {'$set': {'level': "A+"}}, multi=True)
+
 #This method transit rate to level [)
 #slots and level for only minus pairs summation, max is 0; A-D
 #slots = [-0.5863992984, -0.29319964921, -0.0225538192, 0.0225538192], level = ['D', 'C', 'B', 'A']
@@ -109,6 +121,8 @@ def transRateToLevel(slots = getQuantile(), levels = levels):
         lower = slots[index]
     db.packagePair.update({'rate': {'$gte': slots[-1]}}, {'$set': {'level': levels[-1]}}, multi=True)
     db.packagePair.update({'rate': {'$lt': slots[0]}}, {'$set': {'level': levels[0]}}, multi=True)
+    #update for A+ apps
+    updateForAPlus()
 
 #this method is for extractApp.extractPackagePair to use for each entry
 #Should not be used, since the slots can only be decided after rating each app, not during rating
@@ -157,6 +171,7 @@ if __name__ == "__main__":
     #rateDict = calculateRate(rateTable)
     #generateHistData(200, sorted(rateDict.values()))
     #generateHistData(200)
-    transRateToLevel()
+    updateForAPlus()
+    #transRateToLevel()
     #dumpJson()
     #generateQuestions(rateTable, questionSize = 2)
