@@ -171,7 +171,6 @@ if __name__ == "__main__":
     #rateDict = calculateRate(rateTable)
     #generateHistData(200, sorted(rateDict.values()))
     #generateHistData(200)
-    updateForAPlus()
-    #transRateToLevel()
+    transRateToLevel()
     #dumpJson()
     #generateQuestions(rateTable, questionSize = 2)
