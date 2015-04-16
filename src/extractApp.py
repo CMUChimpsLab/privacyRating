@@ -124,6 +124,7 @@ if __name__ == "__main__":
             updatedApkList.append(packagename)
         updatedApkListFile.close()
         
+    extractPackagePair(updatedApkList)
     transRateToLevel()
     now = datetime.datetime.now()
     histFileName =  "hist_" + now.strftime("%Y%m%d") + ".csv"
