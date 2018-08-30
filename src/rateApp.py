@@ -4,42 +4,43 @@ import random
 import pandas as pd
 from dbConfig import dbPrivacyGrading
 
-db = dbPrivacyGrading 
-"""
-deprecated with func getRateTable
-"""
-rateTablePath = ("/home/lsuper/projects/privacyGradePipeline/privacyRating/data/avgCrowdSourceResult.csv")
+# db = dbPrivacyGrading 
+# """
+# deprecated with func getRateTable
+# """
+# rateTablePath = ("/home/lsuper/projects/privacyGradePipeline/privacyRating/data/avgCrowdSourceResult.csv")
 
-def getRateTable(rateTablePath = rateTablePath):
-    """
-    deprecated function, used to get Jialiu aggregated result
-    """
-    f = open(rateTablePath)
-    titles = f.readline().strip().split(",")
-    rateTable = {}
-    for row in f.readlines():
-        rateList = row.strip().split(",")
-        rateTable[rateList[0]] = {titles[index]: float(rateList[index]) for index in range(1,len(rateList))}
-    return rateTable
+# def getRateTable(rateTablePath = rateTablePath):
+#     """
+#     deprecated function, used to get Jialiu aggregated result
+#     """
+#     f = open(rateTablePath)
+#     titles = f.readline().strip().split(",")
+#     rateTable = {}
+#     for row in f.readlines():
+#         rateList = row.strip().split(",")
+#         rateTable[rateList[0]] = {titles[index]: float(rateList[index]) for index in range(1,len(rateList))}
+#     return rateTable
 
-"""
-use data from /home/lsuper/projects/privacyGradePrediction/data/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv 
-calculate average score
-"""
-responseDf = pd.read_csv("/home/lsuper/projects/privacyGradePrediction/data/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv", sep ="\t")
-scoreDf = responseDf.groupby(["permission", "purpose"])["comfortScore"].mean().reset_index()
-#calculate Rate for all entry in packagePair table in one loop
-def calculateRate(rateTablePath = rateTablePath):
-    rateDict = {}
-    for entry in db.packagePair.find(timeout=False):
-        packagename = entry['packagename']
-        rate = calculateRateforOneApp(entry)
-        rateDict[packagename] = rate
-        db.packagePair.update({'packagename' : entry['packagename']}, {'$set': {'rate': rate}} )
-    return rateDict
+# """
+# use data from /home/lsuper/projects/privacyGradePrediction/data/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv 
+# calculate average score
+# """
+# #calculate Rate for all entry in packagePair table in one loop
+# def calculateRate(rateTablePath = rateTablePath):
+#     rateDict = {}
+#     for entry in db.packagePair.find(timeout=False):
+#         packagename = entry['packagename']
+#         rate = calculateRateforOneApp(entry)
+#         rateDict[packagename] = rate
+#         db.packagePair.update({'packagename' : entry['packagename']}, {'$set': {'rate': rate}} )
+#     return rateDict
 
 #calculate Rate for one entry each time; also return negativePermissioniPurposeDict
-def calculateRateforOneApp(labeledPermissionPurposesDict, scoreDf = scoreDf):
+def calculateRateforOneApp(labeledPermissionPurposesDict, repoPath):
+    csvPath = repoPath + "/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv"
+    responseDf = pd.read_csv(csvPath, sep="\t")
+    scoreDf = responseDf.groupby(["permission", "purpose"])["comfortScore"].mean().reset_index()
     rate = 0
     negativePermissionPurposeDict = {}
     for permission, purposeSet in labeledPermissionPurposesDict.iteritems():
