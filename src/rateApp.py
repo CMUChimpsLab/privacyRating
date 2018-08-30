@@ -4,7 +4,6 @@ import random
 import pandas as pd
 from dbConfig import dbPrivacyGrading
 
-# db = dbPrivacyGrading 
 # """
 # deprecated with func getRateTable
 # """
@@ -35,6 +34,8 @@ from dbConfig import dbPrivacyGrading
 #         rateDict[packagename] = rate
 #         db.packagePair.update({'packagename' : entry['packagename']}, {'$set': {'rate': rate}} )
 #     return rateDict
+
+db = dbPrivacyGrading 
 
 #calculate Rate for one entry each time; also return negativePermissioniPurposeDict
 def calculateRateforOneApp(labeledPermissionPurposesDict, repoPath):
