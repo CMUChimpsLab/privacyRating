@@ -22,7 +22,7 @@ from dbConfig import dbPrivacyGrading
 #     return rateTable
 
 # """
-# use data from /home/lsuper/projects/privacyGradePrediction/data/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv 
+# use data from /home/lsuper/projects/privacyGradePrediction/data/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv
 # calculate average score
 # """
 # #calculate Rate for all entry in packagePair table in one loop
@@ -35,11 +35,11 @@ from dbConfig import dbPrivacyGrading
 #         db.packagePair.update({'packagename' : entry['packagename']}, {'$set': {'rate': rate}} )
 #     return rateDict
 
-db = dbPrivacyGrading 
+db = dbPrivacyGrading
 
 #calculate Rate for one entry each time; also return negativePermissioniPurposeDict
 def calculateRateforOneApp(labeledPermissionPurposesDict, repoPath):
-    csvPath = repoPath + "/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv"
+    csvPath = repoPath + "/data/total/ThresholdCorrectCategory/cleanResponseTotalAdjusted.csv"
     responseDf = pd.read_csv(csvPath, sep="\t")
     scoreDf = responseDf.groupby(["permission", "purpose"])["comfortScore"].mean().reset_index()
     rate = 0
@@ -47,15 +47,15 @@ def calculateRateforOneApp(labeledPermissionPurposesDict, repoPath):
     for permission, purposeSet in labeledPermissionPurposesDict.iteritems():
         negativePurposeSet = set()
         for purpose in purposeSet:
-            score = scoreDf[(scoreDf["permission"] == permission) & (scoreDf["purpose"] == purpose)]["comfortScore"] 
+            score = scoreDf[(scoreDf["permission"] == permission) & (scoreDf["purpose"] == purpose)]["comfortScore"]
             assert score.size <= 1
             if score.size == 1 and score.iloc[0] < 0:
                 rate += score.iloc[0]
                 negativePurposeSet.add(purpose)
-        negativePermissionPurposeDict.update({permission: negativePurposeSet})   
+        negativePermissionPurposeDict.update({permission: negativePurposeSet})
     return rate, negativePermissionPurposeDict
 
-#a utility function for generating histogram 
+#a utility function for generating histogram
 def generateHistData(slotSize, outputFile, originalData = []):
     slotSize = float(slotSize)
     if originalData == []:
@@ -88,15 +88,15 @@ def getQuantile():
       originalData.append(entry['rate'])
     df = pd.DataFrame(originalData)
     df = df[df[0] < 0.0].reset_index(drop=True)
-    slots = [df[0].quantile(0.25), df[0].quantile(0.5), df[0].quantile(0.75), df[0].quantile(1.0)] 
+    slots = [df[0].quantile(0.25), df[0].quantile(0.5), df[0].quantile(0.75), df[0].quantile(1.0)]
     return slots
 
 def updateForAPlus():
     """
     We decided to add an A+ grade on Oct. 21, 2014
-    We get a list from ../data/permissionList.csv, which stored in ../data/sensitivePermissionsList 
+    We get a list from ../data/permissionList.csv, which stored in ../data/sensitivePermissionsList
     These permissions are marked with dangerous by Google
-    If an app does not request any sensitive permissions from this list, we grade it with A+ 
+    If an app does not request any sensitive permissions from this list, we grade it with A+
 
     This method will be used by transRateToLevel method
     """
@@ -110,11 +110,11 @@ def updateForAPlus():
 #slots and level for all pairs summation; A-F
 #slots = [-4.479481834, -2.900681466, -0.7016380962, -0.3069380042, -0.0813950945, 0.0877620878, 1.159090909], level = ['F', 'E', 'D', 'C', 'B', 'A']
 #slots = [-0.5863992984, -0.29319964921, -0.0225538192, 0.0225538192]
-#slots = [-0.7752027885, -0.1033603718, -0.02584009295, 0.02584009295] #20140218
+slots = [-0.7752027885, -0.1033603718, -0.02584009295, 0.02584009295] #20140218
 #slots = [-0.5746956041, -0.2947156944, -0.01473578472, 0.01473578472]
 #using new grading scheme, evenly split apps with negative scores
 levels = ['D', 'C', 'B', 'A']
-def transRateToLevel(slots = getQuantile(), levels = levels):
+def transRateToLevel(slots = slots, levels = levels):
     lower = min(slots) - 1
     upper = slots[0]
     for index in range(len(slots)):
@@ -140,8 +140,8 @@ def getLevel(rate, slots = None, levels = levels):
       if rate >= lower and rate < upper:
         return levels[index]
       lower = slots[index]
-  
-  
+
+
 def dumpJson():
     lst = []
     for entry in db.packagePair.find({}, {'_id':0}):
@@ -162,7 +162,7 @@ def generateQuestions(rateTable, levels = ['D', 'C', 'B', 'A'], questionSize = 1
             for permission, purposeList in sample['pairs'].iteritems():
                 for permissionPattern in rateTable:
                     if permission.find(permissionPattern) != -1:
-                       pairs[permission] = [purpose for purpose in sample['pairs'][permission] if purpose in rateTable[permissionPattern].keys()] 
+                       pairs[permission] = [purpose for purpose in sample['pairs'][permission] if purpose in rateTable[permissionPattern].keys()]
             sample['pairs'] = pairs
             samples[index] = sample
         jsonFile = open('survey_%s_last.json'%(level), 'w')

@@ -1,9 +1,9 @@
-from MySQLdb import connect
-from dbConfig import dbStaticAnalysis, dbPrivacyGrading, dbAndroidApp 
-from rateApp import calculateRateforOneApp, transRateToLevel, generateHistData, getLevel
-
 import sys
 import datetime
+from MySQLdb import connect
+
+from dbConfig import dbStaticAnalysis, dbPrivacyGrading, dbAndroidApp
+from rateApp import calculateRateforOneApp, transRateToLevel, generateHistData, getLevel
 
 #this is deprecated.
 def directFromMysql():
@@ -24,7 +24,7 @@ def directFromMysql():
         packagename, permission, third_party_package, is_external = row
         print row
         if is_external == 0:
-            purpose = "INTERNAL" 
+            purpose = "INTERNAL"
         elif third_party_package != "NA":
             cur2.execute("select apitype from labeled3rdparty where externalpack=%s", third_party_package)
             purpose = cur2.fetchone()[0]
@@ -57,7 +57,7 @@ def copyfromMysql():
     cur = mysqldb.cursor()
     cur.execute("select * from test_permissionlist")
     for row in cur.fetchall():
-        test_permissionEntry = {"Id": row[0], "packagename": row[1],  "appfilename": row[2],  "src": row[3], "is_external":row[4],  "3rd_party_package":row[5],  "permission":row[6],  "dest": row[7]}  
+        test_permissionEntry = {"Id": row[0], "packagename": row[1],  "appfilename": row[2],  "src": row[3], "is_external":row[4],  "3rd_party_package":row[5],  "permission":row[6],  "dest": row[7]}
         db.test_permissionlist.insert(test_permissionEntry)
     cur.execute("select * from labeled3rdparty")
     for row in cur.fetchall():
@@ -67,15 +67,26 @@ def copyfromMysql():
     cur.close()
 
 #this is used to build packagePair table
-def extractPackagePair(updatedApkList):
+def extractPackagePair(updatedApkList, reposPath):
     labeledPackageDict = {entry['externalpack']: entry['apitype'] for entry in dbPrivacyGrading.labeled3rdparty.find({}, {'externalpack':1, 'apitype':1})}
     cnt = 0
     for packagename in updatedApkList:
         cnt += 1
         print cnt
+
         #make sure permission in apkInfo is the version analyzed. Do not update apkInfo before extractApp.py run
-        apkInfoEntry = dbAndroidApp.apkInfo.find_one({'packageName':packagename}, {'permission':1, 'updatedTimestamp':1})
-        updatedTimestamp =  apkInfoEntry['updatedTimestamp']
+        apkInfoEntry = dbAndroidApp.apkInfo.find_one({'package_name':packagename},
+                {
+                    "permissions": 1,
+                    "updatedTimestamp": 1,
+                    "date_last_scraped": 1
+                })
+        if "updatedTimestamp" not in apkInfoEntry:
+            # compatability with date_last_scraped
+            updatedTimestamp = datetime.datetime.fromtimestamp(apkInfoEntry["date_last_scraped"])
+        else:
+            updatedTimestamp = apkInfoEntry['updatedTimestamp']
+
         #if app does not require permission, it wont have a permission field in entry
         manifestPermissions =  apkInfoEntry.get('permission', [])
         manifestPermissions = [permission.lstrip('android.permission.') for permission in manifestPermissions if permission.startswith('android.permission.')]
@@ -90,9 +101,9 @@ def extractPackagePair(updatedApkList):
                 continue
             #update permissionExternalPackageDict
             permissionExternalPackageDict.update({entry["permission"]: permissionExternalPackageDict.get(entry["permission"], set())| set([entry['externalpackagename']])})
-            #entry['is_external'] does not matter 
+            #entry['is_external'] does not matter
             if entry['externalpackagename'] == "NA":
-                purpose = "INTERNAL" 
+                purpose = "INTERNAL"
             else:
                 # It is confirmed in current labeled3rdparty table, each externalpack only has one entry
                 if entry['externalpackagename'] in labeledPackageDict:
@@ -103,14 +114,14 @@ def extractPackagePair(updatedApkList):
                     continue
             purposeSet = labeledPermissionPurposesDict.get(entry["permission"], set()) | set([purpose])
             labeledPermissionPurposesDict.update({entry["permission"]: purposeSet})
-                
-        rate, negativePermissionPurposeDict = calculateRateforOneApp(labeledPermissionPurposesDict, 
+
+        rate, negativePermissionPurposeDict = calculateRateforOneApp(labeledPermissionPurposesDict,
             reposPath + "/privacyGradePrediction")
         packagePairEntry = {'packagename': packagename, 'labeledPermissionPurposesPairs': {key: list(value) for key, value in labeledPermissionPurposesDict.iteritems()}, 'permissionExternalPackagesPairs': {key: list(value) for key, value in permissionExternalPackageDict.iteritems()}, 'negativePermissionPurposesPairs': {key: list(value) for key, value in negativePermissionPurposeDict.iteritems()}, 'manifestPermissions': manifestPermissions, 'updatedTimestamp' : updatedTimestamp}
         packagePairEntry['rate'] = rate
-        
+
         dbPrivacyGrading.packagePair.update({'packagename': packagename}, packagePairEntry, upsert=True)
-        
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
@@ -120,7 +131,7 @@ if __name__ == "__main__":
     reposPath = sys.argv[1]
     updatedApkList = []
     if len(sys.argv) > 3 and sys.argv[3] == "rebuild":
-        for entry in dbAndroidApp.apkInfo.find({"isApkUpdated": False}, {"packageName":1, "isDownloaded":1}):
+        for entry in dbAndroidApp.apkInfo.find({"isApkUpdated": False}, {"package_name":1, "isDownloaded":1}):
             if entry['isDownloaded'] == True:
                 updatedApkList.append(entry["packageName"])
     else:
@@ -129,8 +140,8 @@ if __name__ == "__main__":
             packagename = line.rstrip('\n')
             updatedApkList.append(packagename)
         updatedApkListFile.close()
-        
-    extractPackagePair(updatedApkList)
+
+    extractPackagePair(updatedApkList, reposPath)
     transRateToLevel()
     now = datetime.datetime.now()
     histFileName =  "hist_" + now.strftime("%Y%m%d") + ".csv"
