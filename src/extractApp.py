@@ -72,7 +72,7 @@ def extractPackagePair(updatedApkList, reposPath):
     cnt = 0
     for packagename in updatedApkList:
         cnt += 1
-        print cnt
+        print cnt, packagename, "extract"
 
         #make sure permission in apkInfo is the version analyzed. Do not update apkInfo before extractApp.py run
         apkInfoEntry = dbAndroidApp.apkInfo.find_one({'package_name':packagename},
